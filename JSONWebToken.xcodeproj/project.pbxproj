@@ -53,6 +53,7 @@
 		D428B22F1D65A485007926EC = {
 			isa = PBXGroup;
 			children = (
+				D428B2531D65A50D007926EC /* Source */,
 				D428B23B1D65A485007926EC /* JSONWebToken */,
 				D428B2471D65A485007926EC /* JSONWebTokenTests */,
 				D428B23A1D65A485007926EC /* Products */,
@@ -84,6 +85,13 @@
 				D428B24A1D65A485007926EC /* Info.plist */,
 			);
 			path = JSONWebTokenTests;
+			sourceTree = "<group>";
+		};
+		D428B2531D65A50D007926EC /* Source */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Source;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -316,6 +324,7 @@
 				DYLIB_INSTALL_NAME_BASE = "@rpath";
 				INFOPLIST_FILE = JSONWebToken/Info.plist;
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.dia.JSONWebToken;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -332,6 +341,7 @@
 				DYLIB_INSTALL_NAME_BASE = "@rpath";
 				INFOPLIST_FILE = JSONWebToken/Info.plist;
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.dia.JSONWebToken;
 				PRODUCT_NAME = "$(TARGET_NAME)";
