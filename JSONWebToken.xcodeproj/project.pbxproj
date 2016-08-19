@@ -10,6 +10,11 @@
 		D428B23D1D65A485007926EC /* JSONWebToken.h in Headers */ = {isa = PBXBuildFile; fileRef = D428B23C1D65A485007926EC /* JSONWebToken.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		D428B2441D65A485007926EC /* JSONWebToken.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D428B2391D65A485007926EC /* JSONWebToken.framework */; };
 		D428B2491D65A485007926EC /* JSONWebTokenTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D428B2481D65A485007926EC /* JSONWebTokenTests.swift */; };
+		D428B2551D65A7E0007926EC /* CryptoSwift.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D428B2541D65A7E0007926EC /* CryptoSwift.framework */; };
+		D428B2571D65A8AA007926EC /* Base64.swift in Sources */ = {isa = PBXBuildFile; fileRef = D428B2561D65A8AA007926EC /* Base64.swift */; };
+		D428B2591D65AA62007926EC /* Claims.swift in Sources */ = {isa = PBXBuildFile; fileRef = D428B2581D65AA62007926EC /* Claims.swift */; };
+		D428B25B1D65AA8B007926EC /* Decode.swift in Sources */ = {isa = PBXBuildFile; fileRef = D428B25A1D65AA8B007926EC /* Decode.swift */; };
+		D428B25D1D65AA9C007926EC /* JWT.swift in Sources */ = {isa = PBXBuildFile; fileRef = D428B25C1D65AA9C007926EC /* JWT.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -29,6 +34,11 @@
 		D428B2431D65A485007926EC /* JSONWebTokenTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = JSONWebTokenTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		D428B2481D65A485007926EC /* JSONWebTokenTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JSONWebTokenTests.swift; sourceTree = "<group>"; };
 		D428B24A1D65A485007926EC /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		D428B2541D65A7E0007926EC /* CryptoSwift.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CryptoSwift.framework; path = Carthage/Build/iOS/CryptoSwift.framework; sourceTree = "<group>"; };
+		D428B2561D65A8AA007926EC /* Base64.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Base64.swift; sourceTree = "<group>"; };
+		D428B2581D65AA62007926EC /* Claims.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Claims.swift; sourceTree = "<group>"; };
+		D428B25A1D65AA8B007926EC /* Decode.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Decode.swift; sourceTree = "<group>"; };
+		D428B25C1D65AA9C007926EC /* JWT.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = JWT.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -36,6 +46,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				D428B2551D65A7E0007926EC /* CryptoSwift.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -53,6 +64,7 @@
 		D428B22F1D65A485007926EC = {
 			isa = PBXGroup;
 			children = (
+				D428B2541D65A7E0007926EC /* CryptoSwift.framework */,
 				D428B2531D65A50D007926EC /* Source */,
 				D428B23B1D65A485007926EC /* JSONWebToken */,
 				D428B2471D65A485007926EC /* JSONWebTokenTests */,
@@ -90,6 +102,10 @@
 		D428B2531D65A50D007926EC /* Source */ = {
 			isa = PBXGroup;
 			children = (
+				D428B2561D65A8AA007926EC /* Base64.swift */,
+				D428B2581D65AA62007926EC /* Claims.swift */,
+				D428B25A1D65AA8B007926EC /* Decode.swift */,
+				D428B25C1D65AA9C007926EC /* JWT.swift */,
 			);
 			path = Source;
 			sourceTree = "<group>";
@@ -202,6 +218,10 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				D428B2591D65AA62007926EC /* Claims.swift in Sources */,
+				D428B25D1D65AA9C007926EC /* JWT.swift in Sources */,
+				D428B25B1D65AA8B007926EC /* Decode.swift in Sources */,
+				D428B2571D65A8AA007926EC /* Base64.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -318,10 +338,15 @@
 		D428B24E1D65A485007926EC /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				CLANG_ENABLE_MODULES = YES;
 				DEFINES_MODULE = YES;
 				DYLIB_COMPATIBILITY_VERSION = 1;
 				DYLIB_CURRENT_VERSION = 1;
 				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/Carthage/Build/iOS",
+				);
 				INFOPLIST_FILE = JSONWebToken/Info.plist;
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
@@ -329,16 +354,22 @@
 				PRODUCT_BUNDLE_IDENTIFIER = com.dia.JSONWebToken;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = YES;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 			};
 			name = Debug;
 		};
 		D428B24F1D65A485007926EC /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				CLANG_ENABLE_MODULES = YES;
 				DEFINES_MODULE = YES;
 				DYLIB_COMPATIBILITY_VERSION = 1;
 				DYLIB_CURRENT_VERSION = 1;
 				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/Carthage/Build/iOS",
+				);
 				INFOPLIST_FILE = JSONWebToken/Info.plist;
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
