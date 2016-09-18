@@ -9,44 +9,44 @@
 import Foundation
 
 /// Failure reasons from decoding a JWT
-public enum TokenValidationError: CustomStringConvertible, ErrorType {
+public enum TokenValidationError: CustomStringConvertible, Error {
     /// Decoding the JWT itself failed
-    case DecodeError(String)
+    case decodeError(String)
     
     /// The JWT uses an unsupported algorithm
-    case InvalidAlgorithm
+    case invalidAlgorithm
     
     /// The issued claim has expired
-    case ExpiredSignature
+    case expiredSignature
     
     /// The issued claim is for the future
-    case ImmatureSignature
+    case immatureSignature
     
     /// The claim is for the future
-    case InvalidIssuedAt
+    case invalidIssuedAt
     
     /// The audience of the claim doesn't match
-    case InvalidAudience
+    case invalidAudience
     
     /// The issuer claim failed to verify
-    case InvalidIssuer
+    case invalidIssuer
     
     /// Returns a readable description of the error
     public var description: String {
         switch self {
-        case .DecodeError(let error):
+        case .decodeError(let error):
             return "Decode Error: \(error)"
-        case .InvalidIssuer:
+        case .invalidIssuer:
             return "Invalid Issuer"
-        case .ExpiredSignature:
+        case .expiredSignature:
             return "Expired Signature"
-        case .ImmatureSignature:
+        case .immatureSignature:
             return "The token is not yet valid (not before claim)"
-        case .InvalidIssuedAt:
+        case .invalidIssuedAt:
             return "Issued at claim (iat) is in the future"
-        case InvalidAudience:
+        case .invalidAudience:
             return "Invalid Audience"
-        case InvalidAlgorithm:
+        case .invalidAlgorithm:
             return "Unsupported algorithm or incorrect key"
         }
     }
@@ -54,9 +54,9 @@ public enum TokenValidationError: CustomStringConvertible, ErrorType {
 
 
 /// Decode a JWT
-public func decode(jwt: String, algorithms: [Algorithm], verify: Bool = true, audience: String? = nil, issuer: String? = nil) throws -> Payload {
+public func decode(_ jwt: String, algorithms: [Algorithm], verify: Bool = true, audience: String? = nil, issuer: String? = nil) throws -> Payload {
     switch load(jwt) {
-    case let .Success(header, payload, signature, signatureInput):
+    case let .success(header, payload, signature, signatureInput):
         if verify {
             if let error = validateClaims(payload, audience: audience, issuer: issuer) ?? verifySignature(algorithms, header: header, signingInput: signatureInput, signature: signature) {
                 throw error
@@ -64,27 +64,27 @@ public func decode(jwt: String, algorithms: [Algorithm], verify: Bool = true, au
         }
         
         return payload
-    case .Failure(let failure):
+    case .failure(let failure):
         throw failure
     }
 }
 
 /// Decode a JWT
-public func decode(jwt: String, algorithm: Algorithm, verify: Bool = true, audience: String? = nil, issuer: String? = nil) throws -> Payload {
+public func decode(_ jwt: String, algorithm: Algorithm, verify: Bool = true, audience: String? = nil, issuer: String? = nil) throws -> Payload {
     return try decode(jwt, algorithms: [algorithm], verify: verify, audience: audience, issuer: issuer)
 }
 
 // MARK: Parsing a JWT
 
 enum LoadResult {
-    case Success(header: Payload, payload: Payload, signature: NSData, signatureInput: String)
-    case Failure(TokenValidationError)
+    case success(header: Payload, payload: Payload, signature: Data, signatureInput: String)
+    case failure(TokenValidationError)
 }
 
-func load(jwt: String) -> LoadResult {
-    let segments = jwt.componentsSeparatedByString(".")
+func load(_ jwt: String) -> LoadResult {
+    let segments = jwt.components(separatedBy: ".")
     if segments.count != 3 {
-        return .Failure(.DecodeError("Not enough segments"))
+        return .failure(.decodeError("Not enough segments"))
     }
     
     let headerSegment = segments[0]
@@ -93,37 +93,37 @@ func load(jwt: String) -> LoadResult {
     let signatureInput = "\(headerSegment).\(payloadSegment)"
     
     guard let headerData = base64_decode(headerSegment) else {
-        return .Failure(.DecodeError("Header is not correctly encoded as base64"))
+        return .failure(.decodeError("Header is not correctly encoded as base64"))
     }
     
-    guard let header = (try? NSJSONSerialization.JSONObjectWithData(headerData, options: [])) as? Payload else {
-        return .Failure(.DecodeError("Invalid header"))
+    guard let header = (try? JSONSerialization.jsonObject(with: headerData, options: [])) as? Payload else {
+        return .failure(.decodeError("Invalid header"))
     }
     
     guard let payloadData = base64_decode(payloadSegment) else {
-        return .Failure(.DecodeError("Payload is not correctly encoded as base64"))
+        return .failure(.decodeError("Payload is not correctly encoded as base64"))
     }
     
-    guard let payload = (try? NSJSONSerialization.JSONObjectWithData(payloadData, options: [])) as? Payload else {
-        return .Failure(.DecodeError("Invalid payload"))
+    guard let payload = (try? JSONSerialization.jsonObject(with: payloadData, options: [])) as? Payload else {
+        return .failure(.decodeError("Invalid payload"))
     }
     
     guard let signature = base64_decode(signatureSegment) else {
-        return .Failure(.DecodeError("Signature is not correctly encoded as base64"))
+        return .failure(.decodeError("Signature is not correctly encoded as base64"))
     }
     
-    return .Success(header:header, payload:payload, signature:signature, signatureInput:signatureInput)
+    return .success(header:header, payload:payload, signature:signature, signatureInput:signatureInput)
 }
 
 // MARK: Signature Verification
-func verifySignature(algorithms: [Algorithm], header: Payload, signingInput: String, signature: NSData) -> TokenValidationError? {
+func verifySignature(_ algorithms: [Algorithm], header: Payload, signingInput: String, signature: Data) -> TokenValidationError? {
     guard let alg = header["alg"] as? String else {
-        return .DecodeError("Missing Algorithm")
+        return .decodeError("Missing Algorithm")
     }
     
     let matchingAlgorithms = algorithms.filter { $0.description == alg }
     let results = matchingAlgorithms.map { $0.verify(signingInput, signature: signature) }
     let successes = results.filter { $0 }
     
-    return successes.isEmpty ? .InvalidAlgorithm : nil
+    return successes.isEmpty ? .invalidAlgorithm : nil
 }

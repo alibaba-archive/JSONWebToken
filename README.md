@@ -11,13 +11,13 @@ import JSONWebToken
 ### Encoding a claim
 
 ```swift
-JWT.encode(["my": "payload"], algorithm: .HS256("secret"))
+JSONWebToken.encode(["my": "payload"], algorithm: .HS256("secret"))
 ```
 
 #### Building a JWT with the builder pattern
 
 ```swift
-JWT.encode(.HS256("secret")) { builder in
+JSONWebToken.encode(.HS256("secret")) { builder in
   builder.issuer = "fuller.li"
   builder.issuedAt = NSDate()
   builder["custom"] = "Hi"
@@ -28,7 +28,7 @@ JWT.encode(.HS256("secret")) { builder in
 
 When decoding a JWT, you must supply one or more algorithms and keys.
 ```swift
-try JWT.decode("eyJh...5w", algorithms: [.HS256("secret"), .HS256("secret2"), .HS512("secure")])
+try JSONWebToken.decode("eyJh...5w", algorithms: [.HS256("secret"), .HS256("secret2"), .HS512("secure")])
 ```
 
 #### Supported claims
