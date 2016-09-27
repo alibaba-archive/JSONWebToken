@@ -9,7 +9,7 @@
 import Foundation
 import CryptoSwift
 
-public typealias Payload = [String: AnyObject]
+public typealias Payload = [String: Any]
 
 /// The supported Algorithms
 public enum Algorithm: CustomStringConvertible {
@@ -102,35 +102,35 @@ public func encode(_ payload: Payload, algorithm: Algorithm) -> String {
         return base64_encode(data)
     }
     
-    let header = encodeJSON(["typ": "JWT" as AnyObject, "alg": algorithm.description as AnyObject])
+    let header = encodeJSON(["typ": "JWT", "alg": algorithm.description])
     let payload = encodeJSON(payload)
     let signingInput = "\(header).\(payload)"
     let signature = algorithm.sign(signingInput)
     return "\(signingInput).\(signature)"
 }
 
-open class PayloadBuilder {
+public class PayloadBuilder {
     var payload = Payload()
     
-    open var issuer: String? {
+    public var issuer: String? {
         get {
             return payload["iss"] as? String
         }
         set {
-            payload["iss"] = newValue as AnyObject?
+            payload["iss"] = newValue
         }
     }
     
-    open var audience: String? {
+    public var audience: String? {
         get {
             return payload["aud"] as? String
         }
         set {
-            payload["aud"] = newValue as AnyObject?
+            payload["aud"] = newValue
         }
     }
     
-    open var expiration: Date? {
+    public var expiration: Date? {
         get {
             if let expiration = payload["exp"] as? TimeInterval {
                 return Date(timeIntervalSince1970: expiration)
@@ -139,11 +139,11 @@ open class PayloadBuilder {
             return nil
         }
         set {
-            payload["exp"] = newValue?.timeIntervalSince1970 as AnyObject?
+            payload["exp"] = newValue?.timeIntervalSince1970
         }
     }
     
-    open var notBefore: Date? {
+    public var notBefore: Date? {
         get {
             if let notBefore = payload["nbf"] as? TimeInterval {
                 return Date(timeIntervalSince1970: notBefore)
@@ -152,11 +152,11 @@ open class PayloadBuilder {
             return nil
         }
         set {
-            payload["nbf"] = newValue?.timeIntervalSince1970 as AnyObject?
+            payload["nbf"] = newValue?.timeIntervalSince1970
         }
     }
     
-    open var issuedAt: Date? {
+    public var issuedAt: Date? {
         get {
             if let issuedAt = payload["iat"] as? TimeInterval {
                 return Date(timeIntervalSince1970: issuedAt)
@@ -165,11 +165,11 @@ open class PayloadBuilder {
             return nil
         }
         set {
-            payload["iat"] = newValue?.timeIntervalSince1970 as AnyObject?
+            payload["iat"] = newValue?.timeIntervalSince1970
         }
     }
     
-    open subscript(key: String) -> AnyObject? {
+    public subscript(key: String) -> Any? {
         get {
             return payload[key]
         }
