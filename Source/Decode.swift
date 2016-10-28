@@ -52,7 +52,6 @@ public enum TokenValidationError: CustomStringConvertible, Error {
     }
 }
 
-
 /// Decode a JWT
 public func decode(_ jwt: String, algorithms: [Algorithm], verify: Bool = true, audience: String? = nil, issuer: String? = nil) throws -> Payload {
     switch load(jwt) {
@@ -75,13 +74,12 @@ public func decode(_ jwt: String, algorithm: Algorithm, verify: Bool = true, aud
 }
 
 // MARK: Parsing a JWT
-
-enum LoadResult {
+public enum LoadResult {
     case success(header: Payload, payload: Payload, signature: Data, signatureInput: String)
     case failure(TokenValidationError)
 }
 
-func load(_ jwt: String) -> LoadResult {
+public func load(_ jwt: String) -> LoadResult {
     let segments = jwt.components(separatedBy: ".")
     if segments.count != 3 {
         return .failure(.decodeError("Not enough segments"))
