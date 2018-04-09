@@ -20,7 +20,7 @@ func base64_encode(_ input: Data) -> String {
 
 /// URI Safe base64 decode
 func base64_decode(_ input: String) -> Data? {
-    let rem = input.characters.count % 4
+    let rem = input.count % 4
     
     var ending = ""
     if rem > 0 {
