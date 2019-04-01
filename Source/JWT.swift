@@ -65,7 +65,7 @@ public enum Algorithm: CustomStringConvertible {
             let mac = HMAC(key: keyData.bytes, variant: variant)
             let result = (try? mac.authenticate(messageData.bytes)) ?? []
    
-            return base64_encode(Data(bytes: result))
+            return base64_encode(Data(result))
         }
         
         switch self {
