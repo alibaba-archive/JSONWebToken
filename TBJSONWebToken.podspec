@@ -20,5 +20,5 @@ Pod::Spec.new do |s|
   s.ios.deployment_target = '8.0'
 
   s.source_files = 'Source/*.swift'
-  s.dependency 'CryptoSwift'
+  s.dependency 'CryptoSwift', '~> 1.0.0'
 end
