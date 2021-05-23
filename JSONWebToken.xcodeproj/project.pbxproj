@@ -3,14 +3,14 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 46;
+	objectVersion = 52;
 	objects = {
 
 /* Begin PBXBuildFile section */
+		68C3104C265A1EB50032E45E /* CryptoSwift.xcframework in Frameworks */ = {isa = PBXBuildFile; fileRef = 68C3104B265A1EB50032E45E /* CryptoSwift.xcframework */; };
 		D428B23D1D65A485007926EC /* JSONWebToken.h in Headers */ = {isa = PBXBuildFile; fileRef = D428B23C1D65A485007926EC /* JSONWebToken.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		D428B2441D65A485007926EC /* JSONWebToken.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D428B2391D65A485007926EC /* JSONWebToken.framework */; };
 		D428B2491D65A485007926EC /* JSONWebTokenTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D428B2481D65A485007926EC /* JSONWebTokenTests.swift */; };
-		D428B2551D65A7E0007926EC /* CryptoSwift.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D428B2541D65A7E0007926EC /* CryptoSwift.framework */; };
 		D428B2571D65A8AA007926EC /* Base64.swift in Sources */ = {isa = PBXBuildFile; fileRef = D428B2561D65A8AA007926EC /* Base64.swift */; };
 		D428B2591D65AA62007926EC /* Claims.swift in Sources */ = {isa = PBXBuildFile; fileRef = D428B2581D65AA62007926EC /* Claims.swift */; };
 		D428B25B1D65AA8B007926EC /* Decode.swift in Sources */ = {isa = PBXBuildFile; fileRef = D428B25A1D65AA8B007926EC /* Decode.swift */; };
@@ -28,13 +28,14 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		68C3104B265A1EB50032E45E /* CryptoSwift.xcframework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcframework; name = CryptoSwift.xcframework; path = Carthage/Build/CryptoSwift.xcframework; sourceTree = "<group>"; };
 		D428B2391D65A485007926EC /* JSONWebToken.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = JSONWebToken.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		D428B23C1D65A485007926EC /* JSONWebToken.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = JSONWebToken.h; sourceTree = "<group>"; };
 		D428B23E1D65A485007926EC /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		D428B2431D65A485007926EC /* JSONWebTokenTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = JSONWebTokenTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		D428B2481D65A485007926EC /* JSONWebTokenTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JSONWebTokenTests.swift; sourceTree = "<group>"; };
 		D428B24A1D65A485007926EC /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		D428B2541D65A7E0007926EC /* CryptoSwift.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CryptoSwift.framework; path = Carthage/Build/iOS/CryptoSwift.framework; sourceTree = "<group>"; };
+		D428B2541D65A7E0007926EC /* CryptoSwift.xcframework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcframework; name = CryptoSwift.xcframework; path = Carthage/Build/CryptoSwift.xcframework; sourceTree = "<group>"; };
 		D428B2561D65A8AA007926EC /* Base64.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Base64.swift; sourceTree = "<group>"; };
 		D428B2581D65AA62007926EC /* Claims.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Claims.swift; sourceTree = "<group>"; };
 		D428B25A1D65AA8B007926EC /* Decode.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Decode.swift; sourceTree = "<group>"; };
@@ -46,7 +47,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				D428B2551D65A7E0007926EC /* CryptoSwift.framework in Frameworks */,
+				68C3104C265A1EB50032E45E /* CryptoSwift.xcframework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -61,14 +62,23 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		68C3104A265A1EB50032E45E /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				68C3104B265A1EB50032E45E /* CryptoSwift.xcframework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
 		D428B22F1D65A485007926EC = {
 			isa = PBXGroup;
 			children = (
-				D428B2541D65A7E0007926EC /* CryptoSwift.framework */,
+				D428B2541D65A7E0007926EC /* CryptoSwift.xcframework */,
 				D428B2531D65A50D007926EC /* Source */,
 				D428B23B1D65A485007926EC /* JSONWebToken */,
 				D428B2471D65A485007926EC /* JSONWebTokenTests */,
 				D428B23A1D65A485007926EC /* Products */,
+				68C3104A265A1EB50032E45E /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -355,7 +365,8 @@
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				SDKROOT = iphoneos;
-				SWIFT_OPTIMIZATION_LEVEL = "-Owholemodule";
+				SWIFT_COMPILATION_MODE = wholemodule;
+				SWIFT_OPTIMIZATION_LEVEL = "-O";
 				TARGETED_DEVICE_FAMILY = "1,2";
 				VALIDATE_PRODUCT = YES;
 				VERSIONING_SYSTEM = "apple-generic";
@@ -382,7 +393,11 @@
 				INFOPLIST_FILE = JSONWebToken/Info.plist;
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.dia.JSONWebToken;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
@@ -412,7 +427,11 @@
 				INFOPLIST_FILE = JSONWebToken/Info.plist;
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.dia.JSONWebToken;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
@@ -428,7 +447,12 @@
 				CODE_SIGN_STYLE = Manual;
 				DEVELOPMENT_TEAM = "";
 				INFOPLIST_FILE = JSONWebTokenTests/Info.plist;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks $(PROJECT_DIR)/Carthage/Build/iOS";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+					"$(PROJECT_DIR)/Carthage/Build/iOS",
+				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.dia.JSONWebTokenTests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
@@ -443,7 +467,12 @@
 				CODE_SIGN_STYLE = Manual;
 				DEVELOPMENT_TEAM = "";
 				INFOPLIST_FILE = JSONWebTokenTests/Info.plist;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks $(PROJECT_DIR)/Carthage/Build/iOS";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+					"$(PROJECT_DIR)/Carthage/Build/iOS",
+				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.dia.JSONWebTokenTests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
